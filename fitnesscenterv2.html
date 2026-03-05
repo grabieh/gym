@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness Center Candelaria | Entrena a otro nivel</title>
+    <meta name="description" content="Únete al mejor gimnasio de Candelaria. Máquinas modernas, clases dirigidas, seminarios de defensa personal y el mejor ambiente para entrenar en Tenerife.">
+    
+    <style>
+        /* Variables - Estilo Futurista / Cyber-Fitness */
+        :root {
+            --amarillo: #FADB5F;
+            --amarillo-glow: rgba(250, 219, 95, 0.5);
+            --fondo-principal: #0a0a0c;
+            --fondo-secundario: #141418;
+            --texto-principal: #ffffff;
+            --texto-secundario: #a0a0a5;
+            --borde-sutil: rgba(255, 255, 255, 0.1);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--fondo-principal);
+            color: var(--texto-principal);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 { 
+            text-transform: uppercase; 
+            letter-spacing: 2px; 
+            margin-bottom: 15px;
+        }
+
+        a { text-decoration: none; color: var(--texto-principal); transition: color 0.3s; }
+        a:hover { color: var(--amarillo); }
+
+        /* HEADER & NAVEGACIÓN */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 12, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--borde-sutil);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            box-sizing: border-box;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--texto-principal);
+            letter-spacing: 3px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1001; /* Para que quede por encima del menú móvil */
+        }
+
+        .logo span { color: var(--amarillo); }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+            margin: 0;
+            padding: 0;
+            transition: 0.3s ease;
+        }
+
+        nav ul li a {
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ICONO HAMBURGUESA (Oculto en PC) */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            z-index: 1001;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--texto-principal);
+            transition: all 0.3s ease;
+        }
+
+        /* BOTONES FUTURISTAS */
+        .btn {
+            background-color: var(--amarillo);
+            color: #000;
+            padding: 12px 25px;
+            border: none;
+            font-size: 1rem;
+            font-weight: 800;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+        }
+        .btn:hover { 
+            background-color: #fff; 
+            box-shadow: 0 0 20px var(--amarillo-glow);
+            transform: translateY(-2px);
+        }
+
+        /* SECCIONES GLOBALES */
+        section { padding: 120px 20px 60px; text-align: center; }
+        .container { max-width: 1200px; margin: auto; }
+        .seccion-titulo { color: var(--amarillo); font-size: 2.5rem; }
+
+        /* HERO SECTION */
+        #inicio {
+            background: linear-gradient(to bottom, rgba(10,10,12,0.4) 0%, rgba(10,10,12,1) 100%), 
+                        url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1470&auto=format&fit=crop') center/cover;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding-top: 0;
+        }
+        #inicio h1 { font-size: 4rem; margin-bottom: 10px; text-shadow: 2px 2px 10px rgba(0,0,0,0.8); }
+        #inicio p { font-size: 1.2rem; color: var(--texto-secundario); margin-bottom: 40px; max-width: 600px; padding: 0 15px; }
+
+        /* GRIDS COMPARTIDOS (Clases, Tarifas, Galería) */
+        .grid-clases, .grid-tarifas, .grid-galeria {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        /* CARDS CLASES */
+        .clase-card {
+            background-color: var(--fondo-secundario);
+            padding: 30px;
+            border: 1px solid var(--borde-sutil);
+            transition: transform 0.3s, border-color 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .clase-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--amarillo); }
+        .clase-card:hover { transform: translateY(-5px); border-color: var(--amarillo); }
+        .clase-card h3 { color: #fff; }
+        .clase-card p { color: var(--texto-secundario); margin-bottom: 20px; }
+
+        /* CARDS TARIFAS */
+        .tarifa-card {
+            background-color: var(--fondo-principal);
+            padding: 40px 30px;
+            border: 1px solid var(--borde-sutil);
+            transition: 0.3s;
+        }
+        .tarifa-destacada { 
+            border-color: var(--amarillo); 
+            box-shadow: 0 0 30px rgba(250, 219, 95, 0.1);
+            transform: scale(1.05); 
+        }
+        .precio { font-size: 3.5rem; color: var(--amarillo); font-weight: 900; margin: 15px 0; }
+        .precio span { font-size: 1.2rem; color: var(--texto-secundario); }
+
+        /* GALERÍA */
+        .foto-galeria {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            filter: grayscale(80%) contrast(120%);
+            transition: all 0.4s ease;
+            border: 1px solid var(--borde-sutil);
+            border-radius: 4px;
+        }
+        .foto-galeria:hover {
+            filter: grayscale(0%) contrast(100%);
+            transform: scale(1.02);
+            border-color: var(--amarillo);
+            z-index: 2;
+            position: relative;
+        }
+
+        /* HORARIOS */
+        #horarios { background-color: var(--fondo-secundario); border-top: 1px solid var(--borde-sutil); }
+        .horarios-caja {
+            background: var(--fondo-principal);
+            padding: 30px;
+            max-width: 500px;
+            margin: 30px auto 0;
+            border: 1px solid var(--amarillo);
+            box-shadow: 0 0 20px var(--amarillo-glow);
+            text-align: left;
+            font-size: 1.1rem;
+            border-radius: 4px;
+        }
+        .horarios-caja p { display: flex; justify-content: space-between; border-bottom: 1px solid #333; padding-bottom: 10px; }
+        .horarios-caja p:last-child { border-bottom: none; }
+
+        /* FOOTER */
+        footer { background-color: #050505; padding: 40px 20px; text-align: center; }
+        .footer-texto { color: var(--texto-secundario); font-size: 0.9rem; max-width: 600px; margin: auto; }
+        .footer-logo { font-size: 1.5rem; font-weight: 900; margin-bottom: 15px; color: #fff; }
+        .footer-logo span { color: var(--amarillo); }
+
+        /* ==========================================
+           RESPONSIVE DESIGN (MÓVILES Y TABLETS)
+           ========================================== */
+        @media (max-width: 768px) {
+            header { padding: 15px 20px; }
+            
+            /* Menú Hamburguesa activado */
+            .menu-toggle { display: flex; }
+            
+            nav ul {
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100vh;
+                background: rgba(10, 10, 12, 0.98);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 40px;
+                transition: left 0.4s ease;
+            }
+
+            nav ul.active { left: 0; }
+            
+            nav ul li a { font-size: 1.5rem; }
+
+            /* Ajustes de tipografía y espaciado */
+            #inicio h1 { font-size: 2.5rem; }
+            #inicio p { font-size: 1rem; }
+            .seccion-titulo { font-size: 2rem; }
+            section { padding: 80px 15px 40px; }
+            
+            /* Ajuste de tarjetas y cajas */
+            .tarifa-destacada { transform: scale(1); } /* Evitar que se salga de la pantalla */
+            .horarios-caja { padding: 20px; font-size: 0.95rem; }
+            
+            .precio { font-size: 3rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">FC <span>CANDELARIA</span></div>
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav>
+            <ul id="nav-links">
+                <li><a href="#inicio" onclick="toggleMenu()">Inicio</a></li>
+                <li><a href="#clases" onclick="toggleMenu()">Clases</a></li>
+                <li><a href="#tarifas" onclick="toggleMenu()">Tarifas</a></li>
+                <li><a href="#galeria" onclick="toggleMenu()">Galería</a></li>
+                <li><a href="#horarios" onclick="toggleMenu()">Horarios</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="inicio">
+        <div class="container">
+            <h1>Desata tu potencial</h1>
+            <p>Máquinas de última generación, comunidad inigualable y limpieza impecable. Entrena en el mejor ambiente de Tenerife.</p>
+            <button class="btn" onclick="document.getElementById('clases').scrollIntoView();">Ver Clases y Reservar</button>
+        </div>
+    </section>
+
+    <section id="clases">
+        <div class="container">
+            <h2 class="seccion-titulo">Clases y Seminarios</h2>
+            <p style="color: var(--texto-secundario);">Asegura tu plaza online. Paga cómodamente en recepción.</p>
+            <div class="grid-clases">
+                <div class="clase-card">
+                    <h3>Funcional</h3>
+                    <p>Lunes y Miércoles - 10:00h</p>
+                    <button class="btn" style="width: 100%; padding: 10px;">Reservar</button>
+                </div>
+                <div class="clase-card">
+                    <h3>Pilates</h3>
+                    <p>Martes y Jueves - 09:30h</p>
+                    <button class="btn" style="width: 100%; padding: 10px;">Reservar</button>
+                </div>
+                <div class="clase-card" style="border-color: var(--amarillo);">
+                    <h3>Krav Maga (Seminario)</h3>
+                    <p>Sábados - 11:00h | Especial Durotan</p>
+                    <button class="btn" style="width: 100%; padding: 10px;">Me Apunto</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="tarifas">
+        <div class="container">
+            <h2 class="seccion-titulo">Planes de Entrenamiento</h2>
+            <p style="color: var(--texto-secundario);">Pago 100% presencial. Sin ataduras.</p>
+            <div class="grid-tarifas">
+                <div class="tarifa-card">
+                    <h3>Pase 1 Día</h3>
+                    <div class="precio">8€</div>
+                    <p style="color: var(--texto-secundario);">Ideal para turistas. Acceso a sala de máquinas y peso libre.</p>
+                </div>
+                <div class="tarifa-card tarifa-destacada">
+                    <h3>Plan Full</h3>
+                    <div class="precio">45€<span>/mes</span></div>
+                    <p style="color: var(--texto-secundario);">Acceso total. Sala de musculación + Todas las clases dirigidas.</p>
+                </div>
+                <div class="tarifa-card">
+                    <h3>Plan Básico</h3>
+                    <div class="precio">35€<span>/mes</span></div>
+                    <p style="color: var(--texto-secundario);">Acceso a sala de máquinas. Entrena a tu ritmo en horario libre.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="galeria">
+        <div class="container">
+            <h2 class="seccion-titulo">Instalaciones</h2>
+            <p style="color: var(--texto-secundario);">Espacios limpios, ordenados y maquinaria en perfecto estado.</p>
+            <div class="grid-galeria">
+                <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?q=80&w=800&auto=format&fit=crop" alt="Sala de pesas" class="foto-galeria">
+                <img src="https://images.unsplash.com/photo-1540497077202-7c8a3999166f?q=80&w=800&auto=format&fit=crop" alt="Entrenamiento funcional" class="foto-galeria">
+                <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=800&auto=format&fit=crop" alt="Máquinas modernas" class="foto-galeria">
+            </div>
+        </div>
+    </section>
+
+    <section id="horarios">
+        <div class="container">
+            <h2 class="seccion-titulo">Horario de Apertura</h2>
+            <div class="horarios-caja">
+                <p><strong>Lunes a Viernes:</strong> <span>07:00 – 22:00</span></p>
+                <p><strong>Sábados:</strong> <span>09:00 – 18:00</span></p>
+                <p style="color: var(--amarillo);"><strong>Domingos:</strong> <span>Cerrado (Descanso)</span></p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-logo">FC <span>CANDELARIA</span></div>
+            <p class="footer-texto">C. Francia, 1, 38530 Candelaria, Santa Cruz de Tenerife, España.</p>
+            <p class="footer-texto" style="margin-top: 10px;">Entrena con la mejor maquinaria, ambiente familiar y el respaldo de la comunidad Durotan.</p>
+            <p style="margin-top: 30px; color: #444; font-size: 0.8rem;">&copy; 2026 Fitness Center Candelaria. Diseño web por y para el rendimiento.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            // Solo ejecuta si la pantalla es de móvil/tablet
+            if (window.innerWidth <= 768) {
+                const navLinks = document.getElementById('nav-links');
+                navLinks.classList.toggle('active');
+            }
+        }
+    </script>
+
+</body>
+</html>
